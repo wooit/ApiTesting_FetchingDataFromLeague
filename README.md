@@ -20,3 +20,8 @@ In my tests, I focus specifically on the properties sent by the API that are dir
 https://github.com/user-attachments/assets/9a994f07-e22f-43d7-87ba-c3e155fc07ea
 
 ## Run the entire test collection at once
+Testing a collection of API routes in Postman offers significant advantages, especially once everything is properly configured. With just one click, I can execute tests for all 15 routes simultaneously, ensuring that they all function as expected. This streamlined process not only saves time but also provides a comprehensive overview of the API's performance and reliability. By automating these tests, I can quickly identify any issues across multiple routes and make necessary adjustments to keep my project running smoothly.
+
+https://github.com/user-attachments/assets/f817e776-866f-47d7-a6f3-aa93e9fd21fc
+
+## Generate a report automatically with 'newman'
