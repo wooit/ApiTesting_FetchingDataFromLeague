@@ -16,3 +16,7 @@ https://github.com/user-attachments/assets/f9f66cf0-2909-4dd6-85b1-ae0c3082a2b4
 
 ## A quick glance at some of my tests
 In my tests, I focus specifically on the properties sent by the API that are directly used in my project. I also verify the structure of the response and the status code to ensure that everything aligns with my requirements. By testing only the information that impacts my project, I can quickly identify what needs to be updated when the API evolves. This targeted approach allows me to efficiently adapt to changes and maintain the functionality of my application.
+
+https://github.com/user-attachments/assets/9a994f07-e22f-43d7-87ba-c3e155fc07ea
+
+## Run the entire test collection at once
