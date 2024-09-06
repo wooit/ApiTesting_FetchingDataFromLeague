@@ -37,4 +37,5 @@ The ``` newman-reporter-htmlextra ``` tool is incredibly valuable for enhancing 
 
 * Newman link: [newman-reporter-htmlextra](https://www.npmjs.com/package/newman-reporter-htmlextra)
 
-https://github.com/user-attachments/assets/a70cb7db-8aa4-4198-9da0-71ec2f5ca309
+https://github.com/user-attachments/assets/30f96916-e47d-465d-9e15-2878d2a32153
+
