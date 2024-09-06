@@ -1,0 +1,87 @@
+{
+	"id": "8a4e5072-3985-4784-8875-e6fbdfa99435",
+	"values": [
+		{
+			"key": "api-developper-key",
+			"value": "RGAPI-8216d7ec-d868-4b8f-9092-da1730dac024",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "gameName",
+			"value": "Wooit",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "tagLine",
+			"value": "EUW",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "region",
+			"value": "EUROPE",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "regionId",
+			"value": "euw1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "base-url",
+			"value": "https://",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "puuid",
+			"value": "--oOzBpkdtwNvv8_bKLQm6mic-MNzFgyrWLx7HhYCuxgPh6jm9_YPMXK1ktRn_wlBMdKzzsSgxpfqw",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "base-url-assets-unsecure",
+			"value": "http://ddragon.leagueoflegends.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "base-url-assets-secure",
+			"value": "https://ddragon.leagueoflegends.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "currentPatch",
+			"value": "14.15.1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "profileIconId",
+			"value": "18",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "matchId",
+			"value": "EUW1_6756787178",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "typeChallengerQueue\n",
+			"value": "RANKED_SOLO_5x5",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-09-04T12:25:24.154Z",
+	"_postman_exported_using": "Postman/11.11.1-240903-0425"
+}

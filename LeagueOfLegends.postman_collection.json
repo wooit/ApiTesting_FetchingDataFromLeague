@@ -1,0 +1,1656 @@
+{
+	"info": {
+		"_postman_id": "2de434e0-68e4-41c3-9470-afe7cce52b83",
+		"name": "LeagueOfLegends",
+		"description": "This projects aims to test the 15 routes iam using from the RiotGames API\n\nYou can consult their API at this adress : [https://developer.riotgames.com/](https://developer.riotgames.com/)\n\nYou have to signup / login with your game account\n\nThen you must ask for a developper key and add it in your globals in the environment folder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12951427",
+		"_collection_link": "https://geo333.postman.co/workspace/Geo-Workspace~d095b1d8-b331-426d-ba72-91047fd14f97/collection/12951427-2de434e0-68e4-41c3-9470-afe7cce52b83?action=share&source=collection_link&creator=12951427"
+	},
+	"item": [
+		{
+			"name": "summoner data",
+			"item": [
+				{
+					"name": "GET account puuid DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response provides property 'puuid' as a string\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"puuid\");\r",
+									"    pm.expect(jsonData.puuid).to.be.a(\"string\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provides property 'gameName' as a string\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"gameName\");\r",
+									"    pm.expect(jsonData.gameName).to.be.a(\"string\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provides property 'tagLine' as a string\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"tagLine\");\r",
+									"    pm.expect(jsonData.tagLine).to.be.a(\"string\");\r",
+									"})\r",
+									"\r",
+									"pm.globals.set(\"puuid\", jsonData.puuid);\r",
+									"pm.globals.set(\"gameName\", jsonData.gameName);\r",
+									"pm.globals.set(\"tagLine\", jsonData.tagLine);\r",
+									"\r",
+									"pm.test('Globals variables are registered', () => {\r",
+									"    pm.expect(jsonData.puuid).to.eql(pm.globals.get(\"puuid\"))\r",
+									"    pm.expect(jsonData.gameName).to.eql(pm.globals.get(\"gameName\"))\r",
+									"    pm.expect(jsonData.tagLine).to.eql(pm.globals.get(\"tagLine\"))\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const region = pm.request.url.variables.get('region');\r",
+									"pm.globals.set(\"region\", region);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:region.api.riotgames.com/riot/account/v1/accounts/by-riot-id/:game-name/:tagLine?api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":region.api.riotgames.com",
+								"riot",
+								"account",
+								"v1",
+								"accounts",
+								"by-riot-id",
+								":game-name",
+								":tagLine"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}",
+									"description": "This api key needs to be refreshed everyday"
+								}
+							],
+							"variable": [
+								{
+									"key": "region",
+									"value": "europe",
+									"description": "default europe or americas, asia"
+								},
+								{
+									"key": "game-name",
+									"value": "wooit",
+									"description": "name of the player you are searching for"
+								},
+								{
+									"key": "tagLine",
+									"value": "EUW",
+									"description": "Tagline of the region of the player "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player info DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response provides property 'id' as a string\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData.id).to.be.a(\"string\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provides property 'accountId' as a string\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"accountId\");\r",
+									"    pm.expect(jsonData.accountId).to.be.a(\"string\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provides property 'puuid' as a string\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"puuid\");\r",
+									"    pm.expect(jsonData.puuid).to.be.a(\"string\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provides property 'profileIconId' as a number\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"profileIconId\");\r",
+									"    pm.expect(jsonData.profileIconId).to.be.a(\"number\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provides property 'summonerLevel' as a number\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"summonerLevel\");\r",
+									"    pm.expect(jsonData.summonerLevel).to.be.a(\"number\");\r",
+									"})\r",
+									"\r",
+									"pm.globals.set(\"profileIconId\", jsonData.profileIconId);\r",
+									"\r",
+									"pm.test('Globals variables are registered', () => {\r",
+									"    pm.expect(jsonData.profileIconId).to.eql(pm.globals.get(\"profileIconId\"))\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:regionId.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/:puuid?api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":regionId.api.riotgames.com",
+								"lol",
+								"summoner",
+								"v4",
+								"summoners",
+								"by-puuid",
+								":puuid"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "regionId",
+									"value": "{{regionId}}",
+									"description": "default EUW1 or KR, NA1, EUN1 ..."
+								},
+								{
+									"key": "puuid",
+									"value": "{{puuid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player profile ICON DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response;\r",
+									"\r",
+									"pm.test(\"Content-Type is an image of type jpeg\", () => {\r",
+									"    pm.expect(jsonData.headers.find(item => item.key = \"Content-Type\").value).to.eql(\"image/png\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url-assets-secure}}/cdn/:patch/img/profileicon/:profileIconId.png",
+							"host": [
+								"{{base-url-assets-secure}}"
+							],
+							"path": [
+								"cdn",
+								":patch",
+								"img",
+								"profileicon",
+								":profileIconId.png"
+							],
+							"variable": [
+								{
+									"key": "patch",
+									"value": "{{currentPatch}}",
+									"description": "This variable may change when new patch is released"
+								},
+								{
+									"key": "profileIconId",
+									"value": "{{profileIconId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player champion masteries DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"const totalChampionMasteries = jsonData.length\r",
+									"\r",
+									"pm.test(\"Count champion masteries: \" + totalChampionMasteries, () => {\r",
+									"    pm.expect(jsonData.length).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response provides an array for each champions mastery\", () =>{\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each champion mastery has the property 'championId' as a number\", () => {\r",
+									"    for(let champMastery of jsonData){\r",
+									"        pm.expect(champMastery).to.have.property(\"championId\");\r",
+									"        pm.expect(champMastery.championId).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each champion mastery has the property 'championLevel' as a number\", () => {\r",
+									"    for(let champMastery of jsonData){\r",
+									"        pm.expect(champMastery).to.have.property(\"championLevel\");\r",
+									"        pm.expect(champMastery.championLevel).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each champion mastery has the property 'championPoints' as a number\", () => {\r",
+									"    for(let champMastery of jsonData){\r",
+									"        pm.expect(champMastery).to.have.property(\"championPoints\");\r",
+									"        pm.expect(champMastery.championPoints).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each champion mastery has the property 'chestGranted' as a boolean\", () => {\r",
+									"    for(let champMastery of jsonData){\r",
+									"        pm.expect(champMastery).to.have.property(\"chestGranted\");\r",
+									"        pm.expect(champMastery.chestGranted).to.be.a(\"boolean\");\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:regionId.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/:puuid?api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":regionId.api.riotgames.com",
+								"lol",
+								"champion-mastery",
+								"v4",
+								"champion-masteries",
+								"by-puuid",
+								":puuid"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "regionId",
+									"value": "{{regionId}}"
+								},
+								{
+									"key": "puuid",
+									"value": "{{puuid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player match history DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"const totalMatchesFetched = jsonData.length\r",
+									"const query = {};\r",
+									"pm.request.url.query.all().forEach((param) => { query[param.key] = param.value});\r",
+									"const queryParameterCount = parseInt(query.count);\r",
+									"\r",
+									"//setting first matchId in global data for next api call on match info\r",
+									"pm.globals.set(\"matchId\", jsonData[0]);\r",
+									"\r",
+									"pm.test(\"Number of matches fetched: \" + totalMatchesFetched, () => {\r",
+									"    pm.expect(jsonData.length).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Number of matchId fetched is eql to query parameter\", () => {\r",
+									"    pm.expect(jsonData.length).to.be.eql(queryParameterCount)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each matchId is a string\", () => {\r",
+									"    for(let matchId of jsonData){\r",
+									"        pm.expect(matchId).to.be.a(\"string\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:region.api.riotgames.com/lol/match/v5/matches/by-puuid/:puuid/ids?start=0&count=5&api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":region.api.riotgames.com",
+								"lol",
+								"match",
+								"v5",
+								"matches",
+								"by-puuid",
+								":puuid",
+								"ids"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0"
+								},
+								{
+									"key": "count",
+									"value": "5"
+								},
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "region",
+									"value": "{{region}}"
+								},
+								{
+									"key": "puuid",
+									"value": "{{puuid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET player match info DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"matchId fetched is the correct one\", () => {\r",
+									"    pm.expect(jsonData.metadata.matchId).to.be.equal(pm.globals.get(\"matchId\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response provides 'metadata' of the matchId as an object\", () => {\r",
+									"    pm.expect(jsonData.metadata).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response provides 'info'of the matchId as an object\", () => {\r",
+									"    pm.expect(jsonData.info).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"match 'metadata' provides an array with a list of 10 playersId as a string\", () => {\r",
+									"    pm.expect(jsonData.metadata.participants).to.have.lengthOf(10);\r",
+									"    pm.expect(jsonData.metadata.participants).to.be.an(\"array\");\r",
+									"    for(let participantId of jsonData.metadata.participants){\r",
+									"        pm.expect(participantId).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"match 'info' has the property 'gameDuration' as a number \", () => {\r",
+									"    pm.expect(jsonData.info).to.have.property(\"gameDuration\");\r",
+									"    pm.expect(jsonData.info.gameDuration).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"match 'info' has the property 'gameMode' as a string \", () => {\r",
+									"    pm.expect(jsonData.info).to.have.property(\"gameMode\");\r",
+									"    pm.expect(jsonData.info.gameMode).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'riotIdGameName' as a string\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"riotIdGameName\");\r",
+									"        pm.expect(participant.riotIdGameName).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'champLevel' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"champLevel\");\r",
+									"        pm.expect(participant.champLevel).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'deaths' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"deaths\");\r",
+									"        pm.expect(participant.deaths).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'kills' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"kills\");\r",
+									"        pm.expect(participant.kills).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'assists' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"assists\");\r",
+									"        pm.expect(participant.assists).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'totalDamageDealtToChampions' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"totalDamageDealtToChampions\");\r",
+									"        pm.expect(participant.totalDamageDealtToChampions).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'totalDamageTaken' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"totalDamageTaken\");\r",
+									"        pm.expect(participant.totalDamageTaken).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'win' as a boolean\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"win\");\r",
+									"        pm.expect(participant.win).to.be.a(\"boolean\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'doubleKills' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"doubleKills\");\r",
+									"        pm.expect(participant.doubleKills).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'tripleKills' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"tripleKills\");\r",
+									"        pm.expect(participant.tripleKills).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'quadraKills' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"quadraKills\");\r",
+									"        pm.expect(participant.quadraKills).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'pentaKills' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"pentaKills\");\r",
+									"        pm.expect(participant.pentaKills).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'goldEarned' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"goldEarned\");\r",
+									"        pm.expect(participant.goldEarned).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'largestKillingSpree' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"largestKillingSpree\");\r",
+									"        pm.expect(participant.largestKillingSpree).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'largestMultiKill' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"largestMultiKill\");\r",
+									"        pm.expect(participant.largestMultiKill).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'teamId' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"teamId\");\r",
+									"        pm.expect(participant.teamId).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'summoner1Id' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"summoner1Id\");\r",
+									"        pm.expect(participant.summoner1Id).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'summoner2Id' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"summoner2Id\");\r",
+									"        pm.expect(participant.summoner2Id).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'item0' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"item0\");\r",
+									"        pm.expect(participant.item0).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'item1' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"item1\");\r",
+									"        pm.expect(participant.item1).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'item2' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"item2\");\r",
+									"        pm.expect(participant.item2).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'item3' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"item3\");\r",
+									"        pm.expect(participant.item3).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'item4' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"item4\");\r",
+									"        pm.expect(participant.item4).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'item5' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"item5\");\r",
+									"        pm.expect(participant.item5).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each participants has the property 'item6' as a number\", () => {\r",
+									"    for(let participant of jsonData.info.participants){\r",
+									"        pm.expect(participant).to.have.property(\"item6\");\r",
+									"        pm.expect(participant.item6).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:region.api.riotgames.com/lol/match/v5/matches/:matchId?api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":region.api.riotgames.com",
+								"lol",
+								"match",
+								"v5",
+								"matches",
+								":matchId"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "region",
+									"value": "{{region}}"
+								},
+								{
+									"key": "matchId",
+									"value": "{{matchId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Checking the routes regarding data information of a summoner (player)\n\naccount: [https://developer.riotgames.com/apis#account-v1](https://developer.riotgames.com/apis#account-v1)\n\nsummoner: [https://developer.riotgames.com/apis#summoner-v4](https://developer.riotgames.com/apis#summoner-v4)\n\nchampion masteries: [https://developer.riotgames.com/apis#champion-mastery-v4](https://developer.riotgames.com/apis#champion-mastery-v4)\n\nmatch history: [https://developer.riotgames.com/apis#match-v5](https://developer.riotgames.com/apis#match-v5)"
+		},
+		{
+			"name": "champions and assets",
+			"item": [
+				{
+					"name": "GET all champions data DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"const championCount = Object.keys(jsonData.data).length\r",
+									"\r",
+									"pm.test(\"Count champions: \" + championCount, () => {\r",
+									"    pm.expect(Object.keys(jsonData.data).length).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Patch version is correct\", () => {\r",
+									"    pm.expect(jsonData.version).to.be.equal(pm.globals.get(\"currentPatch\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response provides 'data' of the list of champions as an object\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"    pm.expect(jsonData.data).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'id' as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"id\");\r",
+									"        pm.expect(jsonData.data[champion].id).to.be.a(\"string\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'key' as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"key\");\r",
+									"        pm.expect(jsonData.data[champion].key).to.be.a(\"string\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'name' as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"name\");\r",
+									"        pm.expect(jsonData.data[champion].name).to.be.a(\"string\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'title' as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"title\");\r",
+									"        pm.expect(jsonData.data[champion].title).to.be.a(\"string\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'blurb' as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"blurb\");\r",
+									"        pm.expect(jsonData.data[champion].blurb).to.be.a(\"string\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'tags' as an array\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"tags\");\r",
+									"        pm.expect(jsonData.data[champion].tags).to.be.an(\"array\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has at least one tag as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion].tags.length).to.be.greaterThan(0);\r",
+									"        for(let i = 0; i < jsonData.data[champion].tags.length; i++){\r",
+									"            pm.expect(jsonData.data[champion].tags[i]).to.be.a(\"string\");\r",
+									"        }\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'image' as an object\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"image\");\r",
+									"        pm.expect(jsonData.data[champion].image).to.be.an(\"object\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data image has the property 'full' as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion].image).to.have.property(\"full\");\r",
+									"        pm.expect(jsonData.data[champion].image.full).to.be.a(\"string\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data image has the property 'sprite' as a string\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion].image).to.have.property(\"sprite\");\r",
+									"        pm.expect(jsonData.data[champion].image.sprite).to.be.a(\"string\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data has the property 'info' as an object\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion]).to.have.property(\"info\");\r",
+									"        pm.expect(jsonData.data[champion].info).to.be.a(\"object\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Each champion data info has the property 'difficulty' as a number\", () =>{\r",
+									"    for(let champion in jsonData.data){\r",
+									"        pm.expect(jsonData.data[champion].info).to.have.property(\"difficulty\");\r",
+									"        pm.expect(jsonData.data[champion].info.difficulty).to.be.a(\"number\");\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url-assets-unsecure}}/cdn/:patch/data/en_US/champion.json",
+							"host": [
+								"{{base-url-assets-unsecure}}"
+							],
+							"path": [
+								"cdn",
+								":patch",
+								"data",
+								"en_US",
+								"champion.json"
+							],
+							"variable": [
+								{
+									"key": "patch",
+									"value": "{{currentPatch}}",
+									"description": "This variable may change when new patch is released"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET champion by Name DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"const selectedChampion = Object.keys(jsonData.data)[0];\r",
+									"\r",
+									"pm.test(\"Patch version is correct\", () => {\r",
+									"    pm.expect(jsonData.version).to.be.equal(pm.globals.get(\"currentPatch\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response provides 'data' of the champion as an object\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"    pm.expect(jsonData.data).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'id' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].id).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'key' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"key\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].key).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'name' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"name\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].name).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'title' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"title\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].title).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'image' as an object\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"image\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].image).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data image has the property 'full' as an string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].image).to.have.property(\"full\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].image.full).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data image has the property 'sprite' as an string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].image).to.have.property(\"sprite\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].image.sprite).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'skins' as an array\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"skins\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].skins).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data provides at least the default skin\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].skins.length).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each skin has the property 'id' as a string\", () => {\r",
+									"    for(skin in jsonData.data[selectedChampion].skins){\r",
+									"        pm.expect(jsonData.data[selectedChampion].skins[skin]).to.have.property(\"id\");\r",
+									"        pm.expect(jsonData.data[selectedChampion].skins[skin].id).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each skin has the property 'num' as a number\", () => {\r",
+									"    for(skin in jsonData.data[selectedChampion].skins){\r",
+									"        pm.expect(jsonData.data[selectedChampion].skins[skin]).to.have.property(\"num\");\r",
+									"        pm.expect(jsonData.data[selectedChampion].skins[skin].num).to.be.a(\"number\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each skin has the property 'name' as a string\", () => {\r",
+									"    for(skin in jsonData.data[selectedChampion].skins){\r",
+									"        pm.expect(jsonData.data[selectedChampion].skins[skin]).to.have.property(\"name\");\r",
+									"        pm.expect(jsonData.data[selectedChampion].skins[skin].name).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'lore' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"lore\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].lore).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'blurb' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"blurb\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].blurb).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'tags' as an array\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"tags\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].tags).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data provides at least one tag\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].tags.length).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each 'tag' from data is a string \", () => {\r",
+									"    for(let tag of jsonData.data[selectedChampion].tags){\r",
+									"        pm.expect(tag).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'info' as an object\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"info\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].info).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data info has the property 'difficulty' as a number\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].info).to.have.property(\"difficulty\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].info.difficulty).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'spells' as an array\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"spells\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].spells).to.be.a(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data 'spells' expect 4 spells\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].spells.length).to.eql(4);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each spell has the property 'id' as a string\", () => {\r",
+									"    for(let spell of jsonData.data[selectedChampion].spells){\r",
+									"        pm.expect(spell).to.have.property(\"id\");\r",
+									"        pm.expect(spell.id).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each spell has the property 'name' as a string\", () => {\r",
+									"    for(let spell of jsonData.data[selectedChampion].spells){\r",
+									"        pm.expect(spell).to.have.property(\"name\");\r",
+									"        pm.expect(spell.name).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each spell has the property 'description' as a string\", () => {\r",
+									"    for(let spell of jsonData.data[selectedChampion].spells){\r",
+									"        pm.expect(spell).to.have.property(\"description\");\r",
+									"        pm.expect(spell.description).to.be.a(\"string\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data has the property 'passive' as an object\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion]).to.have.property(\"passive\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data passive has the property 'name' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive).to.have.property(\"name\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive.name).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data passive has the property 'description' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive).to.have.property(\"description\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive.description).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data passive has the property 'image' as an object\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive).to.have.property(\"image\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive.image).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data passive image has the property 'full' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive.image).to.have.property(\"full\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive.image.full).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champion data passive image has the property 'sprite' as a string\", () => {\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive.image).to.have.property(\"sprite\");\r",
+									"    pm.expect(jsonData.data[selectedChampion].passive.image.sprite).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url-assets-unsecure}}/cdn/:patch/data/en_US/champion/:ChampionName.json",
+							"host": [
+								"{{base-url-assets-unsecure}}"
+							],
+							"path": [
+								"cdn",
+								":patch",
+								"data",
+								"en_US",
+								"champion",
+								":ChampionName.json"
+							],
+							"variable": [
+								{
+									"key": "patch",
+									"value": "{{currentPatch}}",
+									"description": "This variable may change when new patch is released"
+								},
+								{
+									"key": "ChampionName",
+									"value": "Aatrox",
+									"description": "Enter valide champion name WITH capital first letter"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET champ IMAGE by Name DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response;\r",
+									"\r",
+									"pm.test(\"Content-Type is an image of type png\", () => {\r",
+									"    pm.expect(jsonData.headers.find(item => item.key = \"Content-Type\").value).to.eql(\"image/png\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url-assets-secure}}/cdn/:patch/img/champion/:ChampionName.png",
+							"host": [
+								"{{base-url-assets-secure}}"
+							],
+							"path": [
+								"cdn",
+								":patch",
+								"img",
+								"champion",
+								":ChampionName.png"
+							],
+							"variable": [
+								{
+									"key": "patch",
+									"value": "{{currentPatch}}",
+									"description": "This variable may change when new patch is released"
+								},
+								{
+									"key": "ChampionName",
+									"value": "Aatrox",
+									"description": "Enter valide champion name WITH capital first letter"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET champ SPLASH image DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response;\r",
+									"\r",
+									"pm.test(\"Content-Type is an image of type jpeg\", () => {\r",
+									"    pm.expect(jsonData.headers.find(item => item.key = \"Content-Type\").value).to.eql(\"image/jpeg\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url-assets-unsecure}}/cdn/img/champion/splash/:ChampionName.jpg",
+							"host": [
+								"{{base-url-assets-unsecure}}"
+							],
+							"path": [
+								"cdn",
+								"img",
+								"champion",
+								"splash",
+								":ChampionName.jpg"
+							],
+							"variable": [
+								{
+									"key": "ChampionName",
+									"value": "Aatrox_1",
+									"description": "ChampionName in capital letter followed by \"_SKIN Num\"\nSKIN Num is an integer between 0 (default) and max number of skins of the champion"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET champ SPELLS images DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response;\r",
+									"\r",
+									"pm.test(\"Content-Type is an image of type jpeg\", () => {\r",
+									"    pm.expect(jsonData.headers.find(item => item.key = \"Content-Type\").value).to.eql(\"image/png\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url-assets-secure}}/cdn/:patch/img/spell/:ChampionSpell.png",
+							"host": [
+								"{{base-url-assets-secure}}"
+							],
+							"path": [
+								"cdn",
+								":patch",
+								"img",
+								"spell",
+								":ChampionSpell.png"
+							],
+							"variable": [
+								{
+									"key": "patch",
+									"value": "{{currentPatch}}",
+									"description": "This variable may change when new patch is released"
+								},
+								{
+									"key": "ChampionSpell",
+									"value": "FlashFrost"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET champ PASSIVE image DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response;\r",
+									"\r",
+									"pm.test(\"Content-Type is an image of type jpeg\", () => {\r",
+									"    pm.expect(jsonData.headers.find(item => item.key = \"Content-Type\").value).to.eql(\"image/png\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url-assets-secure}}/cdn/:patch/img/passive/:ChampionName.png",
+							"host": [
+								"{{base-url-assets-secure}}"
+							],
+							"path": [
+								"cdn",
+								":patch",
+								"img",
+								"passive",
+								":ChampionName.png"
+							],
+							"variable": [
+								{
+									"key": "patch",
+									"value": "{{currentPatch}}",
+									"description": "This variable may change when new patch is released"
+								},
+								{
+									"key": "ChampionName",
+									"value": "Aatrox_Passive",
+									"description": "ChampionName_P OR ChampioName_Passive"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Checking the routes regarding the champions data and assets"
+		},
+		{
+			"name": "challenger ranking",
+			"item": [
+				{
+					"name": "GET ranking challengers DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"const totalEntries = jsonData.entries.length\r",
+									"\r",
+									"pm.test(\"Total Entries: \" + totalEntries, () => {\r",
+									"    pm.expect(jsonData.entries.length).to.be.greaterThan(0);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provides the property 'queue' as a string\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"queue\");\r",
+									"    pm.expect(jsonData.queue).to.be.a(\"string\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response provides the property 'entries' as an array\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"entries\");\r",
+									"    pm.expect(jsonData.entries).to.be.an(\"array\"); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each entry has the property 'summonerId' as a string\", () => {\r",
+									"    for(let entry in jsonData.entries){\r",
+									"        pm.expect(jsonData.entries[entry]).to.have.property(\"summonerId\");\r",
+									"        pm.expect(jsonData.entries[entry].summonerId).to.be.a(\"string\");\r",
+									"    }    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each entry has the property 'leaguePoints' as a number\", () => {\r",
+									"    for(let entry in jsonData.entries){\r",
+									"        pm.expect(jsonData.entries[entry]).to.have.property(\"leaguePoints\");\r",
+									"        pm.expect(jsonData.entries[entry].leaguePoints).to.be.a(\"number\");\r",
+									"    }    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each entry has the property 'wins' as a number\", () => {\r",
+									"    for(let entry in jsonData.entries){\r",
+									"        pm.expect(jsonData.entries[entry]).to.have.property(\"wins\");\r",
+									"        pm.expect(jsonData.entries[entry].wins).to.be.a(\"number\");\r",
+									"    }    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Each entry has the property 'losses' as a number\", () => {\r",
+									"    for(let entry in jsonData.entries){\r",
+									"        pm.expect(jsonData.entries[entry]).to.have.property(\"losses\");\r",
+									"        pm.expect(jsonData.entries[entry].losses).to.be.a(\"number\");\r",
+									"    }    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:regionId.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/:typeChallengerQueue?api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":regionId.api.riotgames.com",
+								"lol",
+								"league",
+								"v4",
+								"challengerleagues",
+								"by-queue",
+								":typeChallengerQueue"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "regionId",
+									"value": "{{regionId}}"
+								},
+								{
+									"key": "typeChallengerQueue",
+									"value": "{{typeChallengerQueue\n}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Checking the route regarding the ladder of the RANKED SOLO queue ( top 300 players )\n\n[https://developer.riotgames.com/apis#league-v4](https://developer.riotgames.com/apis#league-v4)"
+		},
+		{
+			"name": "rotation champions",
+			"item": [
+				{
+					"name": "GET rotation of champions DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"const totalChampsInRotation = \"Total champions in rotation:\" + \" \" + jsonData.freeChampionIds.length\r",
+									"\r",
+									"pm.test(totalChampsInRotation, () => {\r",
+									"    pm.expect(jsonData.freeChampionIds.length).to.be.greaterThan(0);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response provide the champions rotation property 'freeChampionIds'\", () => {\r",
+									"    pm.expect(jsonData).to.have.property(\"freeChampionIds\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Champions rotation data is an array of numbers\", () => {\r",
+									"    pm.expect(jsonData.freeChampionIds).to.be.an(\"array\");\r",
+									"    for(let i = 0; i < jsonData.freeChampionIds.length; i++){\r",
+									"        pm.expect(jsonData.freeChampionIds[i]).to.be.a(\"number\")\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:regionId.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":regionId.api.riotgames.com",
+								"lol",
+								"platform",
+								"v3",
+								"champion-rotations"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "regionId",
+									"value": "{{regionId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Checking the route regarding the champions rotation accessible during this week by players\n\n[https://developer.riotgames.com/apis#champion-v3](https://developer.riotgames.com/apis#champion-v3)"
+		},
+		{
+			"name": "status server",
+			"item": [
+				{
+					"name": "GET status of server DONE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"console.log(jsonData);\r",
+									"\r",
+									"pm.test(\"Response provide incidents and maintenances data as arrays\", () => {\r",
+									"    pm.expect(jsonData.incidents).to.be.an(\"array\");\r",
+									"    pm.expect(jsonData.maintenances).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"if(jsonData.maintenances.length === 0){\r",
+									"     pm.test(\"No maintenances reported\")\r",
+									"} else {\r",
+									"    pm.test(\"Each maintenances has property 'id' as an number\", () => {\r",
+									"        for(let i = 0; i < jsonData.maintenances.length; i++){\r",
+									"            pm.expect(jsonData.maintenances[i]).to.have.property(\"id\");\r",
+									"            pm.expect(jsonData.maintenances[i].id).to.be.a(\"number\");\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each maintenances has property 'titles' as an array\", () => {\r",
+									"        for(let i = 0; i < jsonData.maintenances.length; i++){\r",
+									"            pm.expect(jsonData.maintenances[i]).to.have.property(\"titles\");\r",
+									"            pm.expect(jsonData.maintenances[i].titles).to.be.an(\"array\");\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each maintenances has property 'incident_severity' as a string or null\", () => {\r",
+									"        for(let i = 0; i < jsonData.maintenances.length; i++){\r",
+									"            pm.expect(jsonData.maintenances[i]).to.have.property(\"incident_severity\");\r",
+									"            pm.expect(jsonData.maintenances[i].incident_severity).to.be.oneOf([\"info\",\"warning\",\"critical\", null]);\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each maintenances has property 'created_at' as a string\", () => {\r",
+									"        for(let i = 0; i < jsonData.maintenances.length; i++){\r",
+									"            pm.expect(jsonData.maintenances[i]).to.have.property(\"created_at\");\r",
+									"            pm.expect(jsonData.maintenances[i].created_at).to.be.a(\"string\");\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each maintenances has property 'updated_at' as a string or null\", () => {\r",
+									"        for(let i = 0; i < jsonData.maintenances.length; i++){\r",
+									"            pm.expect(jsonData.maintenances[i]).to.have.property(\"updated_at\");\r",
+									"            pm.expect(Object.prototype.toString.call(jsonData.maintenances[i].updated_at)).to.be.oneOf([\"[object String]\",\"[object Null]\"])\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each maintenances has property 'updates' as an array\", () => {\r",
+									"        for(let i = 0; i < jsonData.maintenances.length; i++){\r",
+									"            pm.expect(jsonData.maintenances[i]).to.have.property(\"updates\");\r",
+									"            pm.expect(jsonData.maintenances[i].updates).to.be.an(\"array\");\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each maintenances has property 'platforms' as an array\", () => {\r",
+									"        for(let i = 0; i < jsonData.maintenances.length; i++){\r",
+									"            pm.expect(jsonData.maintenances[i]).to.have.property(\"platforms\");\r",
+									"            pm.expect(jsonData.maintenances[i].platforms).to.be.an(\"array\");\r",
+									"            for(let platform of jsonData.maintenances[i].platforms){\r",
+									"                pm.expect(platform).to.be.a(\"string\")\r",
+									"            }\r",
+									"        }\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"if(jsonData.incidents.length === 0){\r",
+									"    pm.test(\"No incidents reported\")\r",
+									"} else {\r",
+									"    pm.test(\"Each incident has property 'id' as an number\", () => {\r",
+									"        for(let i = 0; i < jsonData.incidents.length; i++){\r",
+									"            pm.expect(jsonData.incidents[i]).to.have.property(\"id\");\r",
+									"            pm.expect(jsonData.incidents[i].id).to.be.a(\"number\");\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each incident has property 'titles' as an array\", () => {\r",
+									"        for(let i = 0; i < jsonData.incidents.length; i++){\r",
+									"            pm.expect(jsonData.incidents[i]).to.have.property(\"titles\");\r",
+									"            pm.expect(jsonData.incidents[i].titles).to.be.an(\"array\");\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each incident has property 'incident_severity' as a string or null\", () => {\r",
+									"        for(let i = 0; i < jsonData.incidents.length; i++){\r",
+									"            pm.expect(jsonData.incidents[i]).to.have.property(\"incident_severity\");\r",
+									"            pm.expect(jsonData.incidents[i].incident_severity).to.be.oneOf([\"info\",\"warning\",\"critical\", null]);\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each incident has property 'created_at' as a string\", () => {\r",
+									"        for(let i = 0; i < jsonData.incidents.length; i++){\r",
+									"            pm.expect(jsonData.incidents[i]).to.have.property(\"created_at\");\r",
+									"            pm.expect(jsonData.incidents[i].created_at).to.be.a(\"string\");\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each incident has property 'updated_at' as a string or null\", () => {\r",
+									"        for(let i = 0; i < jsonData.incidents.length; i++){\r",
+									"            pm.expect(jsonData.incidents[i]).to.have.property(\"updated_at\");\r",
+									"            //pm.expect(jsonData.incidents[i].updated_at).to.be.oneOf([\"string\", null]);\r",
+									"            pm.expect(Object.prototype.toString.call(jsonData.incidents[i].updated_at)).to.be.oneOf([\"[object String]\",\"[object Null]\"])\r",
+									"        }\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Each incident has property 'updates' as an array\", () => {\r",
+									"        for(let i = 0; i < jsonData.incidents.length; i++){\r",
+									"            pm.expect(jsonData.incidents[i]).to.have.property(\"updates\");\r",
+									"            pm.expect(jsonData.incidents[i].updates).to.be.an(\"array\");\r",
+									"        }\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Each incident has property 'platforms' as an array\", () => {\r",
+									"        for(let i = 0; i < jsonData.incidents.length; i++){\r",
+									"            pm.expect(jsonData.incidents[i]).to.have.property(\"platforms\");\r",
+									"            pm.expect(jsonData.incidents[i].platforms).to.be.an(\"array\");\r",
+									"            for(let platform of jsonData.incidents[i].platforms){\r",
+									"                pm.expect(platform).to.be.a(\"string\")\r",
+									"            }\r",
+									"        }\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/:regionId.api.riotgames.com/lol/status/v4/platform-data?api_key={{api-developper-key}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								":regionId.api.riotgames.com",
+								"lol",
+								"status",
+								"v4",
+								"platform-data"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{api-developper-key}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "regionId",
+									"value": "{{regionId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Checking the route regarding the status of the league of legend platforms\n\n[https://developer.riotgames.com/apis#lol-status-v4](https://developer.riotgames.com/apis#lol-status-v4)"
+		}
+	]
+}
