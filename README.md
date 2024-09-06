@@ -18,7 +18,7 @@ I have uploaded several videos to demonstrate how my testing environment is set 
 ## Get and set an API key
 First it's necessary to visit the RiotGames API in order to get a valid developper key (this key is valid only for 24 hours) as demonstrated in the following video. Then copy / paste in the global variables of your collection on Postman.
 
-https://github.com/user-attachments/assets/f9f66cf0-2909-4dd6-85b1-ae0c3082a2b4
+https://github.com/user-attachments/assets/09bdaa45-a0c9-4c69-9036-398097bea72a
 
 ## A quick glance at some of my tests
 In my tests, I focus specifically on the properties sent by the API that are directly used in my project. I also verify the structure of the response and the status code to ensure that everything aligns with my requirements. By testing only the information that impacts my project, I can quickly identify what needs to be updated when the API evolves. This targeted approach allows me to efficiently adapt to changes and maintain the functionality of my application.
