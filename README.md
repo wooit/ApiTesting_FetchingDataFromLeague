@@ -30,7 +30,7 @@ Testing a collection of API routes in Postman offers significant advantages, esp
 
 Organizing my API routes in a way that avoids dependencies between them is crucial for ensuring reliable and consistent testing. By structuring the routes independently, I can run tests on each one without worrying about the order or the success of previous routes. This approach prevents cascading failures, where an issue in one route could impact the testing of others. It also makes it easier to isolate and troubleshoot specific routes, leading to more accurate results and a smoother integration process in my project.
 
-https://github.com/user-attachments/assets/f817e776-866f-47d7-a6f3-aa93e9fd21fc
+https://github.com/user-attachments/assets/4334abea-4f3e-427d-afdc-bbf6c7794065
 
 ## Generate a report automatically with 'newman'
 The ``` newman-reporter-htmlextra ``` tool is incredibly valuable for enhancing the output of my Postman test runs. It generates detailed and customizable HTML reports that go beyond the standard output, providing a clear and organized view of your my results. These reports include rich visual elements like graphs, tables, and summaries, making it easier to analyze the performance of the API routes. With this tool, I can quickly identify issues, track test coverage, and share the results with team members or stakeholders in an easy-to-understand format.
