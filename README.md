@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/09bdaa45-a0c9-4c69-9036-398097bea72a
 ## A quick glance at some of my tests
 In my tests, I focus specifically on the properties sent by the API that are directly used in my project. I also verify the structure of the response and the status code to ensure that everything aligns with my requirements. By testing only the information that impacts my project, I can quickly identify what needs to be updated when the API evolves. This targeted approach allows me to efficiently adapt to changes and maintain the functionality of my application.
 
-https://github.com/user-attachments/assets/9a994f07-e22f-43d7-87ba-c3e155fc07ea
+https://github.com/user-attachments/assets/f36b90d4-4136-4727-9f65-5ff2392971fd
 
 ## Run the entire test collection at once
 Testing a collection of API routes in Postman offers significant advantages, especially once everything is properly configured. With just one click, I can execute tests for all 15 routes simultaneously, ensuring that they all function as expected. This streamlined process not only saves time but also provides a comprehensive overview of the API's performance and reliability. By automating these tests, I can quickly identify any issues across multiple routes and make necessary adjustments to keep my project running smoothly.
